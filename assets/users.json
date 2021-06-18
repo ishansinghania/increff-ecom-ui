@@ -1,0 +1,26 @@
+[
+    {
+        "id": 1,
+        "name": "Ishan Singhania",
+        "password": "increff_ishan",
+        "email": "ishans@increff.com"
+    },
+    {
+        "id": 2,
+        "name": "Ravishankar V",
+        "password": "increff_ravi",
+        "email": "raviv@increff.com"
+    },
+    {
+        "id": 1,
+        "name": "Shubham omar",
+        "password": "increff_shubham",
+        "email": "shubhamo@increff.com"
+    },
+    {
+        "id": 1,
+        "name": "Sindhuja",
+        "password": "increff_sindhuja",
+        "email": "sindhuja@increff.com"
+    }
+]
