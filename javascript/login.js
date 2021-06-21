@@ -13,10 +13,10 @@ $('form').on('submit', function (event) {
         } else {
             $('#error-message').removeClass('d-none');
         }
-    })
-
-    function setUser(user) {
-        localStorage.setItem('user', JSON.stringify(user));
-        window.location.href="/";
-    }
+    });
 });
+
+function setUser(user) {
+    localStorage.setItem('user', JSON.stringify(user));
+    window.location.href="/";
+}

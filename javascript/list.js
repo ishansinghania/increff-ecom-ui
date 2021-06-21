@@ -2,7 +2,7 @@ $(document).ready(() => {
     $.getJSON('/assets/available-inventory.json', (products) => {
         $.each(products, function (i, product) {
             const entry = `
-            <div class="d-flex flex-column justify-content-between mx-3 my-2 product-container border rounded shadow-sm" style="width: 210px;" 
+            <div class="d-flex flex-column justify-content-between mx-3 my-2 product-container border rounded shadow-sm cursor-pointer" style="width: 210px;" 
                     id="`+ i + `">
                 <div class="mx-auto">
                     <img class="img-fluid rounded img-thumbnail border-0" src="`+ product.image + `"
@@ -34,7 +34,7 @@ $(document).ready(() => {
             $('.cart-section').click((event) => event.stopImmediatePropagation());
 
             $('#' + i).on({
-                'click': () => window.location.href = "/html/detail.html?id=" + i,
+                'click': () => window.location.href = "/html/detail.html?id=" + (i+1),
                 'mouseenter': () => $('#cart-section-' + i).show(),
                 'mouseleave': () => {
                     $('#cart-section-' + i).hide();
@@ -51,29 +51,3 @@ $(document).ready(() => {
     })
     updateCartQuantity();
 });
-
-function addToCart(product, quantity) {
-    const productCopy = { ...product }; // Creating a new object to avoid changing of original product object
-    const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
-
-    if (cartItems.length) {
-        const index = cartItems.findIndex(item => item.id === productCopy.id);
-        if (index >= 0) {
-            cartItems[index].quantity += quantity;
-        } else {
-            productCopy['quantity'] = quantity;
-            cartItems.push(productCopy);
-        }
-    } else {
-        productCopy['quantity'] = quantity;
-        cartItems.push(productCopy);
-    }
-    localStorage.setItem('cartItems', JSON.stringify(cartItems));
-}
-
-function updateCartQuantity() {
-    const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
-    const quantity = cartItems.reduce((accr, curr) => accr += curr.quantity, 0);
-
-    $('.cart-quantity').text(quantity);
-}
