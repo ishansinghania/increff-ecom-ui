@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Checkout</title>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="-1" />
+    <meta http-equiv="cache-control" content="no-cache" />
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="icon" href="https://storage.googleapis.com/www.increff.com/img/favicon.png?v=2" type="image/x-icon" />
+    <link rel="stylesheet" href=" https://static.increff.com/bootstrap/4.6.0/css/bootstrap.min.css?v=2" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <script src="https://static.increff.com/jquery/3.6.0/jquery-3.6.0.min.js?v=2"></script>
+</head>
+
+<body>
+    <script type="text/javascript" src="/javascript/main.js"></script>
+    <div class="loader" id="loader">Loading...</div>
+    <nav class="navbar navbar-light shadow-sm mb-4">
+        <a class="navbar-brand" href="/">
+            <img src="/assets/brand-logo.png" style="height: 32px;" />
+        </a>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-7">
+                <h4 class="font-weight-bold mx-2">Orders</h4>
+                <div class="product-list border rounded shadow-sm" id="product-list"></div>
+            </div>
+            <div class="col-5">
+                <h4 class="font-weight-bold mx-2">Payments</h4>
+                <div class="border shadow-sm rounded p-2">
+                    <h6 class="font-weight-bold mt-2">Total Items (<span id="total-items">0</span>)</h6>
+                    <div class="d-flex align-items-center justify-content-between">
+                        <span>Order Summary</span>
+                        <span id="mrp">
+                            <i class="fas fa-rupee-sign fa-xs pr-1"></i>
+                        </span>
+                    </div>
+                    <div class="d-flex align-items-center justify-content-between">
+                        <span>GST</span>
+                        <span id="gst">
+                            <i class="fas fa-rupee-sign fa-xs pr-1"></i>
+                        </span>
+                    </div>
+                    <hr />
+                    <div class="d-flex align-items-center justify-content-between font-weight-bold">
+                        <span>Subtotal</span>
+                        <span id="subtotal">
+                            <i class="fas fa-rupee-sign fa-xs pr-1"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="/javascript/checkout.js"></script>
+    <script src=" https://static.increff.com/bootstrap/4.6.0/js/bootstrap.bundle.min.js?v=2"></script>
+    <script type="text/javascript" src="/javascript/alert.js"></script>
+</body>
+
+</html>
