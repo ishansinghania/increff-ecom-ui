@@ -26,6 +26,8 @@ $(document).ready(() => {
             const quantity = parseInt($('#quantity').val());
             addToCart(product, quantity);
             updateCartQuantity();
+
+            showSuccess(void 0, 'Product added successfully');
         });
     });
 });

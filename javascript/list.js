@@ -2,7 +2,7 @@ $(document).ready(() => {
     $.getJSON('/assets/available-inventory.json', (products) => {
         $.each(products, function (i, product) {
             const entry = `
-            <div class="d-flex flex-column justify-content-between mx-3 my-2 product-container border rounded shadow-sm cursor-pointer" style="width: 210px;" 
+            <div class="d-flex flex-column justify-content-between mx-3 my-2 product-container border rounded shadow-sm cursor-pointer col-3" style="width: 210px;" 
                     id="`+ i + `">
                 <div class="mx-auto">
                     <img class="img-fluid rounded img-thumbnail border-0" src="`+ product.image + `"
@@ -10,7 +10,7 @@ $(document).ready(() => {
                 </div>
                 <div class="product-detail my-1 px-2 position-relative">
                     <div class="cart-section p-2" id="cart-section-`+ i + `">
-                        <input class="small py-1 px-2" value="1" type="number" id="input`+ i + `">
+                        <input class="small py-1 px-2" value="1" min="1" type="number" id="input`+ i + `">
                         <button class="btn btn-outline-primary btn-sm" id="btn`+ i + `">+ Add</button>
                     </div>
                     <div class="font-weight-bold">`+ product.brandName + `</div>
@@ -34,7 +34,7 @@ $(document).ready(() => {
             $('.cart-section').click((event) => event.stopImmediatePropagation());
 
             $('#' + i).on({
-                'click': () => window.location.href = "/html/detail.html?id=" + (i+1),
+                'click': () => window.location.href = "/html/detail.html?id=" + (i + 1),
                 'mouseenter': () => $('#cart-section-' + i).show(),
                 'mouseleave': () => {
                     $('#cart-section-' + i).hide();
@@ -46,6 +46,8 @@ $(document).ready(() => {
                 const quantity = parseInt($('#input' + i).val());
                 addToCart(product, quantity);
                 updateCartQuantity();
+
+                showSuccess(void 0, 'Product added successfully');
             })
         });
     })

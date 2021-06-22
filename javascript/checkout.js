@@ -39,7 +39,7 @@ $(document).ready(() => {
         paymentInfo.mrp += product.mrp;
     });
 
-    $('#total-items').text(cartItems.length);
+    if (Array.isArray(cartItems)) $('#total-items').text(cartItems.length);
 
     // Payment Calculation
     paymentInfo.gst = +(0.14 * paymentInfo.mrp).toFixed(2);

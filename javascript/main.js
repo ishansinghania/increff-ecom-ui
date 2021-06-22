@@ -2,21 +2,18 @@ $(document).ready(function () {
     const user = localStorage.getItem('user');
     if (!user) window.location.href = '/html/login.html';
 
+    // Hiding the loader once the document is ready.
     $("#loader").hide();
-
-    $(document).bind("ajaxSend", function () {
-        $("#loader").show();
-    }).bind("ajaxComplete", function () {
-        $("#loader").hide();
-    });
 
     updateCartQuantity();
 });
 
-function logout() {
-    localStorage.removeItem('user');
-    window.location.href = '/html/login.html';
-}
+// To subscribe to the ajax requests even before the document is ready.
+$(document).bind("ajaxSend", function () {
+    $("#loader").show();
+}).bind("ajaxComplete", function () {
+    $("#loader").hide();
+});
 
 function updateCartQuantity() {
     const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
@@ -42,4 +39,9 @@ function addToCart(product, quantity) {
         cartItems.push(productCopy);
     }
     localStorage.setItem('cartItems', JSON.stringify(cartItems));
+}
+
+function logout() {
+    localStorage.removeItem('user');
+    window.location.href = '/html/login.html';
 }
