@@ -4,14 +4,15 @@ $(document)
     .bind("ajaxComplete", () => $("#loader").hide())
     .bind("ajaxError", () => $("#loader").hide());
 
-setInterval(getDateTime, 1000);
-
 $(document).ready(function () {
     if (!isUserLoggedIn()) redirectToLogin();
 
     // Hiding the loader once the document is ready.
     $("#loader").hide();
+
     updateCartQuantity();
+    setInterval(getDateTime, 1000);
+    $('[data-tooltip="tooltip"]').tooltip()
 });
 
 function addToCart(product, quantity) {
