@@ -33,7 +33,7 @@ function addToCart(product, quantity) {
     }
 
     const productCopy = { ...product }; // Creating a new object to avoid changing of original product object
-    const cartItems = JSON.parse(localStorage.getItem(getCartKey())) || [];
+    const cartItems = localStorage.getItem(getCartKey()) ? JSON.parse(localStorage.getItem(getCartKey())) : [];
 
     if (cartItems.length) {
         const index = cartItems.findIndex(item => item.id === productCopy.id);
@@ -55,7 +55,7 @@ function addToCart(product, quantity) {
 }
 
 function updateCartQuantity() {
-    const cartItems = JSON.parse(localStorage.getItem(getCartKey())) || [];
+    const cartItems = localStorage.getItem(getCartKey()) ? JSON.parse(localStorage.getItem(getCartKey())) : [];
     const productQuantity = cartItems.reduce((accr, curr) => accr += curr.quantity, 0);
 
     $('.cart-quantity').text(productQuantity);
@@ -89,7 +89,7 @@ function redirectToHome() {
 
 function getDateTime() {
     $('#date-time')
-        .text(new Date().toLocaleString('en-US', { 
+        .text(new Date().toLocaleString('en-US', {
             weekday: 'long',
             month: 'long',
             year: 'numeric',

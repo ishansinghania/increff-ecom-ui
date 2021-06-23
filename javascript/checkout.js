@@ -1,7 +1,7 @@
 $('.container').addClass('d-none');
 
 $(document).ready(() => {
-    const cartItems = JSON.parse(localStorage.getItem(getCartKey()));
+    const cartItems = localStorage.getItem(getCartKey()) ? JSON.parse(localStorage.getItem(getCartKey())) : [];
 
     const paymentInfo = {
         total: 0,
@@ -25,7 +25,7 @@ $(document).ready(() => {
 
             // Appnding the cloned element in the list
             $('#product-list').append(productEntry);
-    
+
             paymentInfo.subtotal += (product?.mrp || 0 * Number(product?.quantity || 0));
             paymentInfo.productCount += 1;
         }
