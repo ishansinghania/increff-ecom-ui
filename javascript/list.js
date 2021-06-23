@@ -26,7 +26,6 @@ $(document).ready(() => {
                     </div>
                 </div>
             </div>`;
-
             $('#list-container').append(entry);
 
             $('.cart-section').hide();

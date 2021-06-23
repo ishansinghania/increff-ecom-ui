@@ -4,6 +4,8 @@ $(document)
     .bind("ajaxComplete", () => $("#loader").hide())
     .bind("ajaxError", () => $("#loader").hide());
 
+setInterval(getDateTime, 1000);
+
 $(document).ready(function () {
     if (!isUserLoggedIn()) redirectToLogin();
 
@@ -77,4 +79,17 @@ function redirectToLogin() {
 
 function redirectToHome() {
     window.location.href = '/';
+}
+
+function getDateTime() {
+    $('#date-time')
+        .text(new Date().toLocaleString('en-US', { 
+            weekday: 'long',
+            month: 'long',
+            year: 'numeric',
+            day: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit',
+        }));
 }
