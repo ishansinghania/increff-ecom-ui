@@ -3,7 +3,9 @@
 @import './alert.css';
 
 html {
+    min-height: 100%;
     font-size: 15px;
+    position: relative;
 }
 
 nav {
@@ -14,9 +16,13 @@ nav {
     width: 100%
 }
 
+.navbar-brand img {
+    height: 32px;
+}
+
 .footer {
     display: flex;
-    position: fixed;
+    position: absolute;
     bottom: 0;
     width: 100%;
     /* Set the fixed height of the footer here */
@@ -50,4 +56,25 @@ nav {
 
 div.tooltip.show {
     z-index: 12000;
+}
+
+.light-name {
+    opacity: 0.8;
+}
+
+hr {
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+p {
+    color: #343a40;
+}
+
+img.checkout-image {
+    height: 10rem;
+}
+
+.login-container {
+    top: 20%;
 }

@@ -14,21 +14,6 @@
     <link rel="stylesheet" href=" https://static.increff.com/bootstrap/4.6.0/css/bootstrap.min.css?v=2" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
     <script src="https://static.increff.com/jquery/3.6.0/jquery-3.6.0.min.js?v=2"></script>
-
-    <style>
-        p {
-            color: #343a40;
-        }
-
-        hr {
-            margin-top: 1.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        img {
-            object-fit: fill;
-        }
-    </style>
 </head>
 
 <body>
@@ -42,7 +27,7 @@
     <nav class="navbar navbar-light shadow-sm">
         <div class="container-fluid">
             <a class="navbar-brand mr-auto" href="/">
-                <img src="/assets/brand-logo.png" style="height: 32px;" />
+                <img src="/assets/brand-logo.png" />
             </a>
             <div class="nav-item px-2">
                 <a class="nav-link text-dark position-relative" href="/html/checkout.html">
@@ -63,7 +48,7 @@
 
     <div class="container">
         <div class="row">
-            <div class="col-6">
+            <div class="col-12 col-lg-6">
                 <div id="caraouselControl" class="carousel slide" data-ride="carousel" data-interval="2000">
                     <div class="carousel-inner">
                         <div class="carousel-item">
@@ -80,9 +65,9 @@
                     </a>
                 </div>
             </div>
-            <div class="col-6 py-3">
+            <div class="col-12 col-lg-6 py-3">
                 <h4 class="font-weight-bold" id="product-brand"></h4>
-                <h5 class="text-secondary" id="product-name" style="opacity: 0.8;"></h5>
+                <h5 class="text-secondary light-name" id="product-name"></h5>
                 <hr>
                 <h6 class="d-flex align-items-center">
                     <span class="text-dark pr-2">MRP:</span>&nbsp;
@@ -94,12 +79,12 @@
                     <span class="font-weight-bold size"></span>
                 </h6>
                 <form class="mt-4 row align-items-end m-0">
-                    <div class="form-group mb-md-0 col-9 col-md-5 col-lg-4 p-0">
+                    <div class="form-group mb-md-0 col-12 col-sm-7 col-md-3 col-lg-4 p-0">
                         <label for="quantity" class="text-secondary">Quantity</label>
                         <input type="number" class="form-control" id="quantity" value="1" min="1"
                             placeholder="Quantity">
                     </div>
-                    <button type="submit" class="btn btn-primary col-md-5 col-lg-3 col-9 col-sm-6 ml-md-3"
+                    <button type="submit" class="btn btn-primary col-12 col-md-3 col-lg-3 col-sm-7  ml-md-3"
                         id="#add-to-cart-btn">Add To Cart</button>
                 </form>
                 <hr>
