@@ -1,6 +1,11 @@
+$('.container').addClass('d-none');
+
 $(document).ready(function () {
+    if (isUserLoggedIn()) redirectToHome();
+
     // Hiding the loader once the document is ready.
     $("#loader").hide();
+    $('.container').removeClass('d-none');
 });
 
 $('form').on('submit', function (event) {
@@ -9,20 +14,38 @@ $('form').on('submit', function (event) {
     const email = $('input#email').val();
     const password = $('input#password').val();
 
-    $.getJSON('/assets/users.json', (users) => {
-        const user = users.filter(user => email === user.email && password === user.password);
-        if (user && user.length > 0) {
-            $('#error-message').addClass('d-none');
-            setUser(user);
-            showSuccess(void 0, 'Logged in successfully');
+    if (!isUserLoggedIn())
+        $.getJSON('/assets/users.json', (users) => {
+            const user = users.filter(user => email === user.email && password === user.password);
+            if (user?.length) {
+                $('#error-message').addClass('d-none');
+                setUser(user);
+                showSuccess('Logged in successfully');
 
-        } else {
-            $('#error-message').removeClass('d-none');
-        }
-    });
+            } else {
+                $('#error-message').removeClass('d-none');
+            }
+        });
+    else {
+        showError('User already logged in!');
+        setTimeout(redirectToHome, 1500);
+    }
 });
 
 function setUser(user) {
-    localStorage.setItem('user', JSON.stringify(user));
+    localStorage.setItem(getUserKey(), JSON.stringify(user));
     window.location.href = "/";
+}
+
+function isUserLoggedIn() {
+    const user = localStorage.getItem(getUserKey());
+    return !!user;
+}
+
+function redirectToHome() {
+    window.location.href = '/';
+}
+
+function getUserKey() {
+    return 'user';
 }

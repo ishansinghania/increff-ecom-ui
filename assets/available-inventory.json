@@ -7,7 +7,7 @@
         "clientSkuId": "190496015203",
         "color": "Black",
         "mrp": 1999,
-        "size": "XS",
+        "sizes": "XS, L, M, XL",
         "styleId": "1297125-002",
         "image": "http://assets.myntassets.com/assets/images/13719116/2021/3/3/90d0980a-8b39-48bd-9bf9-a67beb14a9741614753528611-Athena-Fuchsia-Pink-top-with-power-shoulder-sleeve-detail-22-1.jpg",
         "images": [
@@ -29,7 +29,7 @@
         "clientSkuId": "190496015203",
         "color": "Black",
         "mrp": 3999,
-        "size": "L",
+        "sizes": "XS, L, M, XL",
         "styleId": "1297125-002",
         "image": "http://assets.myntassets.com/assets/images/productimage/2020/2/14/11adb5a6-9666-4bd2-8ed8-03fd20291f9d1581635929903-1.jpg",
         "images": [
@@ -51,7 +51,7 @@
         "clientSkuId": "190496015203",
         "color": "Black",
         "mrp": 2999,
-        "size": "XS",
+        "sizes": "XS, L, M, XL",
         "styleId": "1297125-002",
         "image": "http://assets.myntassets.com/assets/images/486789/2016/12/19/11482142240622-INVICTUS-Men-White-Tailored-Fit-Formal-Shirt-4561482142240310-1.jpg",
         "images": [
@@ -73,7 +73,7 @@
         "clientSkuId": "190496015203",
         "color": "Black",
         "mrp": 1999,
-        "size": "L",
+        "sizes": "XS, L, M, XL",
         "styleId": "1297125-002",
         "image": "http://assets.myntassets.com/assets/images/11534880/2020/3/2/0d860735-daab-44c1-b131-8a02e77b01161583132344014-Louis-Philippe-Men-Blue--White-Slim-Fit-Checked-Formal-Shirt-1.jpg",
         "images": [
@@ -95,7 +95,7 @@
         "clientSkuId": "190496015203",
         "color": "Black",
         "mrp": 800,
-        "size": "M",
+        "sizes": "XS, L, M, XL",
         "styleId": "1297125-002",
         "image": "http://assets.myntassets.com/assets/images/productimage/2019/2/1/518c7cfc-061f-4b6f-9340-b4593d6eaa1a1548965343911-1.jpg",
         "images": [
@@ -117,7 +117,7 @@
         "clientSkuId": "190496015203",
         "color": "Black",
         "mrp": 6999,
-        "size": "M",
+        "sizes": "XS, L, M, XL",
         "styleId": "1297125-002",
         "image": "http://assets.myntassets.com/assets/images/13770602/2021/6/12/1934e330-772b-4cdf-a4ed-6e472a1de8e21623494948079-Nautica-Men-Shirts-551623494947464-1.jpg",
         "images": [
@@ -139,7 +139,7 @@
         "clientSkuId": "190496015203",
         "color": "Black",
         "mrp": 1999,
-        "size": "XS",
+        "sizes": "XS, L, M, XL",
         "styleId": "1297125-002",
         "image": "http://assets.myntassets.com/assets/images/productimage/2021/2/17/80bacb59-de18-48d4-b46c-890d6da3970e1613552042993-1.jpg",
         "images": [
@@ -161,7 +161,7 @@
         "clientSkuId": "190496015203",
         "color": "Black",
         "mrp": 4999,
-        "size": "S",
+        "sizes": "XS, L, M, XL",
         "styleId": "1297125-002",
         "image": "http://assets.myntassets.com/assets/images/productimage/2020/6/9/aae6d5da-cee2-4fdf-99cd-b5421d86d68a1591654989641-1.jpg",
         "images": [
@@ -184,7 +184,7 @@
         "clientSkuId": "190496015203",
         "color": "Black",
         "mrp": 999,
-        "size": "L",
+        "sizes": "XS, L, M, XL",
         "styleId": "1297125-002",
         "image": "http://assets.myntassets.com/assets/images/productimage/2021/2/18/07b7a314-decd-421a-b447-01b2411e24e61613643428870-1.jpg",
         "images": [
@@ -207,7 +207,7 @@
         "clientSkuId": "190496015203",
         "color": "Black",
         "mrp": 800,
-        "size": "M",
+        "sizes": "XS, L, M, XL",
         "styleId": "1297125-002",
         "image": "http://assets.myntassets.com/assets/images/productimage/2021/1/27/c3f87e02-333b-4008-aa5c-3bb5d3fc658a1611743836816-1.jpg",
         "images": [
@@ -229,7 +229,7 @@
         "clientSkuId": "190496015203",
         "color": "Black",
         "mrp": 1999,
-        "size": "XS",
+        "sizes": "XS, L, M, XL",
         "styleId": "1297125-002",
         "image": "http://assets.myntassets.com/assets/images/productimage/2021/4/23/fd5535a2-daad-4e14-a083-5b51158f0ce81619163573953-1.jpg",
         "images": [
@@ -251,7 +251,7 @@
         "clientSkuId": "190496015203",
         "color": "Black",
         "mrp": 1999,
-        "size": "XS",
+        "sizes": "XS, L, M, XL",
         "styleId": "1297125-002",
         "image": "http://assets.myntassets.com/assets/images/13719116/2021/3/3/90d0980a-8b39-48bd-9bf9-a67beb14a9741614753528611-Athena-Fuchsia-Pink-top-with-power-shoulder-sleeve-detail-22-1.jpg",
         "images": [
@@ -273,7 +273,7 @@
         "clientSkuId": "190496015203",
         "color": "Black",
         "mrp": 3999,
-        "size": "L",
+        "sizes": "XS, L, M, XL",
         "styleId": "1297125-002",
         "image": "http://assets.myntassets.com/assets/images/productimage/2020/2/14/11adb5a6-9666-4bd2-8ed8-03fd20291f9d1581635929903-1.jpg",
         "images": [
@@ -295,7 +295,7 @@
         "clientSkuId": "190496015203",
         "color": "Black",
         "mrp": 2999,
-        "size": "XS",
+        "sizes": "XS, L, M, XL",
         "styleId": "1297125-002",
         "image": "http://assets.myntassets.com/assets/images/486789/2016/12/19/11482142240622-INVICTUS-Men-White-Tailored-Fit-Formal-Shirt-4561482142240310-1.jpg",
         "images": [
@@ -317,7 +317,7 @@
         "clientSkuId": "190496015203",
         "color": "Black",
         "mrp": 1999,
-        "size": "L",
+        "sizes": "XS, L, M, XL",
         "styleId": "1297125-002",
         "image": "http://assets.myntassets.com/assets/images/11534880/2020/3/2/0d860735-daab-44c1-b131-8a02e77b01161583132344014-Louis-Philippe-Men-Blue--White-Slim-Fit-Checked-Formal-Shirt-1.jpg",
         "images": [
@@ -339,7 +339,7 @@
         "clientSkuId": "190496015203",
         "color": "Black",
         "mrp": 800,
-        "size": "M",
+        "sizes": "XS, L, M, XL",
         "styleId": "1297125-002",
         "image": "http://assets.myntassets.com/assets/images/productimage/2019/2/1/518c7cfc-061f-4b6f-9340-b4593d6eaa1a1548965343911-1.jpg",
         "images": [
@@ -361,7 +361,7 @@
         "clientSkuId": "190496015203",
         "color": "Black",
         "mrp": 6999,
-        "size": "M",
+        "sizes": "XS, L, M, XL",
         "styleId": "1297125-002",
         "image": "http://assets.myntassets.com/assets/images/13770602/2021/6/12/1934e330-772b-4cdf-a4ed-6e472a1de8e21623494948079-Nautica-Men-Shirts-551623494947464-1.jpg",
         "images": [
@@ -383,7 +383,7 @@
         "clientSkuId": "190496015203",
         "color": "Black",
         "mrp": 1999,
-        "size": "XS",
+        "sizes": "XS, L, M, XL",
         "styleId": "1297125-002",
         "image": "http://assets.myntassets.com/assets/images/productimage/2021/2/17/80bacb59-de18-48d4-b46c-890d6da3970e1613552042993-1.jpg",
         "images": [
@@ -405,7 +405,7 @@
         "clientSkuId": "190496015203",
         "color": "Black",
         "mrp": 4999,
-        "size": "S",
+        "sizes": "XS, L, M, XL",
         "styleId": "1297125-002",
         "image": "http://assets.myntassets.com/assets/images/productimage/2020/6/9/aae6d5da-cee2-4fdf-99cd-b5421d86d68a1591654989641-1.jpg",
         "images": [
@@ -428,7 +428,7 @@
         "clientSkuId": "190496015203",
         "color": "Black",
         "mrp": 999,
-        "size": "L",
+        "sizes": "XS, L, M, XL",
         "styleId": "1297125-002",
         "image": "http://assets.myntassets.com/assets/images/productimage/2021/2/18/07b7a314-decd-421a-b447-01b2411e24e61613643428870-1.jpg",
         "images": [
@@ -451,7 +451,7 @@
         "clientSkuId": "190496015203",
         "color": "Black",
         "mrp": 800,
-        "size": "M",
+        "sizes": "XS, L, M, XL",
         "styleId": "1297125-002",
         "image": "http://assets.myntassets.com/assets/images/productimage/2021/1/27/c3f87e02-333b-4008-aa5c-3bb5d3fc658a1611743836816-1.jpg",
         "images": [
@@ -473,7 +473,7 @@
         "clientSkuId": "190496015203",
         "color": "Black",
         "mrp": 1999,
-        "size": "XS",
+        "sizes": "XS, L, M, XL",
         "styleId": "1297125-002",
         "image": "http://assets.myntassets.com/assets/images/productimage/2021/4/23/fd5535a2-daad-4e14-a083-5b51158f0ce81619163573953-1.jpg",
         "images": [

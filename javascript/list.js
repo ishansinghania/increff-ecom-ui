@@ -1,3 +1,5 @@
+$('.container').addClass('d-none');
+
 $(document).ready(() => {
     $.getJSON('/assets/available-inventory.json', (products) => {
         $.each(products, function (i, product) {
@@ -15,11 +17,8 @@ $(document).ready(() => {
                     </div>
                     <div class="font-weight-bold">`+ product.brandName + `</div>
                     <small class="text-secondary">`+ product.name + `</small>
-                    <div class="d-flex align-items-center justify-content-between">
-                        <div class="small">
-                            <span class="text-muted pr-1">Size:</span>
-                            <span class="font-weight-light text-dark">`+ product.size + `</span>
-                        </div>
+                    <div class="d-flex align-items-center">
+                        <span>MRP:</span>&nbsp;
                         <div class="d-flex align-items-center font-weight-bold">
                             <i class="fas fa-rupee-sign fa-xs pr-1"></i>
                             <span>`+ product.mrp + `</span>
@@ -43,13 +42,11 @@ $(document).ready(() => {
             })
 
             $('#btn' + i).bind('click', (event) => {
-                const quantity = parseInt($('#input' + i).val());
+                const quantity = Number($('#input' + i).val());
                 addToCart(product, quantity);
-                updateCartQuantity();
-
-                showSuccess(void 0, 'Product added successfully');
             })
         });
-    })
+        $('.container').removeClass('d-none');
+    });
     updateCartQuantity();
 });

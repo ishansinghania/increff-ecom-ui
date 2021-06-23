@@ -1,6 +1,6 @@
-function showToaster(heading, message, type = 'danger' || 'success') {
+function showToaster(message, heading, type = 'danger' || 'success') {
     const toaster = `
-        <div class="toast m-2 ml-auto  `+ type +`" role="alert" data-delay="1000">
+        <div class="toast m-2 ml-auto  `+ type + `" role="alert" data-delay="1000">
             <div class="toast-header border-bottom">
                 <strong class="mr-auto">`+ heading + `</strong>
                 <button type="button" class="ml-2 close" data-dismiss="toast">
@@ -13,16 +13,19 @@ function showToaster(heading, message, type = 'danger' || 'success') {
         </div>`;
 
     $('.toast-container').append(toaster);
+
+    if (type === 'danger') $('.toast.danger').attr('data-autohide', false);
+
     $('.toast').toast('show');
     $('.toast').on('hidden.bs.toast', function () {
         $(this).remove();
     });
 }
 
-function showSuccess(heading = "Success", message = "Success message") {
-    this.showToaster(heading, message, 'success');
+function showSuccess(message = "Success message", heading = "Success",) {
+    this.showToaster(message, heading, 'success');
 }
 
-function showErrorToast(heading = "Error", message = "Error message") {
-    this.showToaster(heading, message, 'danger');
+function showError(message = "Error message", heading = "Error") {
+    this.showToaster(message, heading, 'danger');
 }

@@ -18,16 +18,20 @@
 
 <body>
     <script type="text/javascript" src="/javascript/main.js"></script>
-    <div class="loader" id="loader">Loading...</div>
+    <div class="loader-container" id="loader">
+        <div class="loader" > Loading...</div>
+    </div>
     <nav class="navbar navbar-light shadow-sm mb-4">
-        <a class="navbar-brand umr-ato" href="/">
-            <img src="/assets/brand-logo.png" style="height: 32px;" />
-        </a>
-        <div class="nav-item dropdown px-2">
-            <i class="fas fa-user-circle fa-lg dropdown-toggle" id="navbarDropdown" role="button"
-                data-toggle="dropdown"></i>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="#" onclick="logout()">Logout</a>
+        <div class="container-fluid">
+            <a class="navbar-brand umr-ato" href="/">
+                <img src="/assets/brand-logo.png" style="height: 32px;" />
+            </a>
+            <div class="nav-item dropdown px-2">
+                <i class="fas fa-user-circle fa-lg dropdown-toggle" id="navbarDropdown" role="button"
+                    data-toggle="dropdown"></i>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="#" onclick="logout()">Logout</a>
+                </div>
             </div>
         </div>
     </nav>
@@ -67,6 +71,7 @@
     </div>
     <script type="text/javascript" src="/javascript/checkout.js"></script>
     <script src=" https://static.increff.com/bootstrap/4.6.0/js/bootstrap.bundle.min.js?v=2"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.1/papaparse.min.js"></script>
     <script type="text/javascript" src="/javascript/alert.js"></script>
 </body>
 
