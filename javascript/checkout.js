@@ -13,7 +13,7 @@ $(document).ready(() => {
     // Getting all the products
     $.getJSON('/assets/available-inventory.json', (products) => {
 
-    // Traversing through all the values of the cart
+        // Traversing through all the values of the cart
         $.each(cartItems, (i, cartItem) => {
             // Checking if the product id is still present in our inventory
             const product = products.find(value => value.id === cartItem.id);
@@ -58,23 +58,53 @@ $(document).ready(() => {
         $('#gst').append(paymentInfo.gst);
         $('#total').append(paymentInfo.total);
 
+        $('#place-order').click(() => {
+            if (isUserLoggedIn()) downloadOrder(products, cartItems);
+            else redirectToLogin();
+            return;
+        });
+
         // Showing the page when the page is completly loaded and filled with data.
         $('.container').removeClass('d-none');
     });
 
 });
 
-// function downloadOrder() {
-//     var csv = Papa.unparse({
-//         "fields": ["Column 1", "Column 2"],
-//         "data": [
-//             ["foo", "bar"],
-//             ["abc", "def"]
-//         ]
-//     });
+function downloadOrder(productsList, cartItems) {
+    const fields = ["id", "brandName", "name", "clientSkuId", "size", "mrp"];
 
-//     var tempLink = document.createElement('a');
-//     tempLink.href = csvURL;
-//     tempLink.setAttribute('download', 'order.csv');
-//     tempLink.click();
-// }
+    // creating an array of products based on the fields.
+    const products = cartItems.map(item => {
+        const temp = {};
+        const product = productsList.find(product => product.id === item.id);
+
+        for (field of fields) temp[field] = product[field];
+
+        temp.quantity = item.quantity;
+        temp.subtotal = product.mrp * item.quantity;
+        temp.gst = +(temp.subtotal * 0.14).toFixed(2);
+        temp.total = +(temp.subtotal + temp.gst).toFixed(2);
+        return temp;
+    });
+
+    // Sorting in ascending order
+    products.sort((a, b) => a.id - b.id);
+
+    // unparsing into csv
+    const csv = Papa.unparse(products);
+
+    // converting to a blob file
+    const csvData = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+    let csvURL = null;
+    if (navigator.msSaveBlob) {
+        csvURL = navigator.msSaveBlob(csvData, 'order.csv');
+    } else {
+        csvURL = window.URL.createObjectURL(csvData);
+    }
+
+    // creating a temporary element to mock a click and download the file.
+    const tempLink = document.createElement('a');
+    tempLink.href = csvURL;
+    tempLink.setAttribute('download', 'order.csv');
+    tempLink.click();
+}
