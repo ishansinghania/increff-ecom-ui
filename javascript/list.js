@@ -3,34 +3,31 @@ $('.container').addClass('d-none');
 $(document).ready(() => {
     $.getJSON('/assets/available-inventory.json', (products) => {
         $.each(products, function (i, product) {
-            const entry = `
-            <div class="d-flex flex-column justify-content-between mx-3 my-2 product-container border rounded shadow-sm cursor-pointer col-3" style="width: 210px;" 
-                    id="`+ i + `">
-                <div class="mx-auto">
-                    <img class="img-fluid rounded img-thumbnail border-0" src="`+ product.image + `"
-                        alt="Image not Available">
-                </div>
-                <div class="product-detail my-1 px-2 position-relative">
-                    <div class="cart-section p-2" id="cart-section-`+ i + `">
-                        <input class="small py-1 px-2" value="1" min="1" type="number" id="input`+ i + `">
-                        <button class="btn btn-outline-primary btn-sm" id="btn`+ i + `">+ Add</button>
-                    </div>
-                    <div class="font-weight-bold">`+ product.brandName + `</div>
-                    <small class="text-secondary">`+ product.name + `</small>
-                    <div class="d-flex align-items-center">
-                        <span>MRP:</span>&nbsp;
-                        <div class="d-flex align-items-center font-weight-bold">
-                            <i class="fas fa-rupee-sign fa-xs pr-1"></i>
-                            <span>`+ product.mrp + `</span>
-                        </div>
-                    </div>
-                </div>
-            </div>`;
-            $('#list-container').append(entry);
+            // Cloning the first element to fill the product data inside it's elements
+            const productElement = $('.product-container').first().clone();
 
+            // Adding attributes and text in the child elements
+            productElement.attr('id', i);
+            productElement.find('img').attr('src', product?.image);
+            productElement.find('.cart-section').attr('id', 'cart-section-' + i);
+            productElement.find('input').attr('id', 'input' + i);
+            productElement.find('button').attr('id', 'btn' + i);
+
+            productElement.find('.product-brand').text(product?.brandName);
+            productElement.find('.product-name').text(product?.name);
+            productElement.find('.product-size').text(product?.size);
+            productElement.find('.product-mrp').text(product?.mrp);
+
+            // Appending the cloned element in the container
+            $('#list-container').append(productElement);
+
+            // Hiding the cart popup initially
             $('.cart-section').hide();
+
+            // Stopping the event bubble
             $('.cart-section').click((event) => event.stopImmediatePropagation());
 
+            // Attaching the event handlers to various mouse and click events on the product
             $('#' + i).on({
                 'click': () => window.location.href = "/html/detail.html?id=" + (i + 1),
                 'mouseenter': () => $('#cart-section-' + i).show(),
@@ -40,12 +37,17 @@ $(document).ready(() => {
                 }
             })
 
+            // To add the product in the cart.
             $('#btn' + i).bind('click', (event) => {
                 const quantity = Number($('#input' + i).val());
                 addToCart(product, quantity);
             })
         });
+
+        // Removing the first dummy element from the product container.
+        $('#list-container').find('.product-container').first().remove();
+
+        // Showing the container once the list is populated.
         $('.container').removeClass('d-none');
     });
-    updateCartQuantity();
 });

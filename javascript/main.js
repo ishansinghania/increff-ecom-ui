@@ -10,8 +10,13 @@ $(document).ready(function () {
     // Hiding the loader once the document is ready.
     $("#loader").hide();
 
+    // Initializing the cart quantity in the ui.
     updateCartQuantity();
+
+    // Automatically update the date time in the footer every second
     setInterval(getDateTime, 1000);
+
+    // Initializing the tooltip. Required for the tooltip to work
     $('[data-tooltip="tooltip"]').tooltip()
 });
 

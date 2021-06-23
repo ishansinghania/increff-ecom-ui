@@ -40,28 +40,55 @@
         <div class="row">
             <div class="col-7">
                 <h4 class="font-weight-bold mx-2">Orders</h4>
-                <div class="product-list border rounded shadow-sm" id="product-list"></div>
+                <div class="border rounded shadow-sm" id="product-list">
+                    <div class="row m-0 p-2 border-bottom product">
+                        <img class="img-fluid rounded img-thumbnail border-0"
+                            src=""
+                            alt="Image not Available" style="height: 10rem;">
+                        <div class="col py-2 d-flex justify-content-between mr-auto flex-wrap">
+                            <div>
+                                <h5 class="font-weight-bold product-brand"></h5>
+                                <div class="text-secondary product-name"></div>
+                                <div>
+                                    <span class="text-secondary">Size:</span>&nbsp;
+                                    <span class="font-weight-bold product-size"></span>
+                                </div>
+                            </div>
+                            <div class="justify-items-end">
+                                <div class="d-flex align-items-center justify-content-end font-weight-bold mb-2">
+                                    <i class="fas fa-rupee-sign fa-xs pr-1"></i>
+                                    <span class="product-mrp"></span>
+                                </div>
+                                <div>
+                                    <span class="text-secondary">Quantity:</span>&nbsp;
+                                    <span class="product-quantity"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <h5 class="m-2 d-none" id="no-product">Add more products to place an order</h5>
             </div>
             <div class="col-5">
                 <h4 class="font-weight-bold mx-2">Payments</h4>
                 <div class="border shadow-sm rounded p-2">
                     <h6 class="font-weight-bold mt-2">Total Items (<span id="total-items">0</span>)</h6>
                     <div class="d-flex align-items-center justify-content-between">
-                        <span>Order Summary</span>
-                        <span id="mrp">
-                            <i class="fas fa-rupee-sign fa-xs"></i>
+                        <span>Subtotal</span>
+                        <span id="subtotal">
+                            <i class="fas fa-rupee-sign fa-xs text-dark"></i>
                         </span>
                     </div>
                     <div class="d-flex align-items-center justify-content-between">
                         <span>GST</span>
                         <span id="gst">
-                            <i class="fas fa-rupee-sign fa-xs"></i>
+                            <i class="fas fa-rupee-sign fa-xs text-dark"></i>
                         </span>
                     </div>
                     <hr />
                     <div class="d-flex align-items-center justify-content-between font-weight-bold">
-                        <span>Subtotal</span>
-                        <span id="subtotal">
+                        <span>Total</span>
+                        <span id="total">
                             <i class="fas fa-rupee-sign fa-xs"></i>
                         </span>
                     </div>

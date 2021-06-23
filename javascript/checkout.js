@@ -4,59 +4,53 @@ $(document).ready(() => {
     const cartItems = JSON.parse(localStorage.getItem(getCartKey()));
 
     const paymentInfo = {
-        mrp: 0,
+        total: 0,
         gst: 0,
         subtotal: 0,
-        totalProducts: 0,
+        productCount: 0,
     };
 
+    // Traversing through all the values of the cart
     $.each(cartItems, (i, product) => {
         if (product.quantity) {
-            const entry = `
-            <div class="row m-0 p-2 border-bottom">
-                <img class="img-fluid rounded img-thumbnail border-0"
-                    src="`+ product.image + `"
-                    alt="Image not Available" style="height: 10rem;">
-                <div class="col py-2 d-flex justify-content-between mr-auto flex-wrap">
-                    <div>
-                        <h5 class="font-weight-bold">`+ product.brandName + `</h5>
-                        <div class="text-secondary">`+ product.name + `</div>
-                        <div>
-                            <span class="text-secondary">Size:</span>&nbsp;
-                            <span class="font-weight-bold">`+ product.size + `</span>
-                        </div>
-                    </div>
-                    <div class="justify-items-end">
-                        <div class="d-flex align-items-center justify-content-end font-weight-bold mb-2">
-                            <i class="fas fa-rupee-sign fa-xs pr-1"></i>
-                            <span>`+ product.mrp + `</span>
-                        </div>
-                        <div>
-                            <span class="text-secondary">Quantity:</span>&nbsp;
-                            <span>`+ product.quantity + `</span>
-                        </div>
-                    </div>
-                </div>
-            </div>`;
-            $('#product-list').append(entry);
+            const productEntry = $('.product').first().clone();
+
+            // Adding the attributes and values of the product in the cloned element
+            productEntry.find('img').attr('src', product?.image || '');
+            productEntry.find('.product-brand').text(product?.brandName || '');
+            productEntry.find('.product-name').text(product?.name || '');
+            productEntry.find('.product-size').text(product?.size || '');
+            productEntry.find('.product-mrp').text(product?.mrp || 0);
+            productEntry.find('.product-quantity').text(product?.quantity || 0);
+
+            // Appnding the cloned element in the list
+            $('#product-list').append(productEntry);
     
-            paymentInfo.mrp += (product.mrp * Number(product.quantity));
-            paymentInfo.totalProducts += 1;
+            paymentInfo.subtotal += (product?.mrp || 0 * Number(product?.quantity || 0));
+            paymentInfo.productCount += 1;
         }
     });
-    if (!paymentInfo.totalProducts) {
-        $('#product-list').after('<h5 class="m-2">Add more products to place an order</h5>');
+
+    // Removing the dummy element from the list
+    $('#product-list').find('.product').first().remove();
+
+    if (!paymentInfo.productCount) {
+        $('#no-product').removeClass('d-none');
     }
-    $('#total-items').text(paymentInfo.totalProducts);
+
+    // Setting the total item value
+    $('#total-items').text(paymentInfo.productCount);
 
     // Payment Calculation
-    paymentInfo.gst = +(0.14 * paymentInfo.mrp).toFixed(2);
-    paymentInfo.subtotal = paymentInfo.mrp + paymentInfo.gst;
+    paymentInfo.gst = +(0.14 * paymentInfo.subtotal).toFixed(2);
+    paymentInfo.total = (paymentInfo.subtotal + paymentInfo.gst).toFixed(2);
 
-    $('#mrp').append(paymentInfo.mrp);
-    $('#gst').append(paymentInfo.gst);
+    // Adding the payment values in the view
     $('#subtotal').append(paymentInfo.subtotal);
+    $('#gst').append(paymentInfo.gst);
+    $('#total').append(paymentInfo.total);
 
+    // Showing the page when the page is completly loaded and filled with data.
     $('.container').removeClass('d-none');
 
 });
