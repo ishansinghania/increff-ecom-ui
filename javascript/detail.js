@@ -40,7 +40,7 @@ $(document).ready(() => {
         // To add product along with the quantity in the cart.
         $('form').on('submit', (event) => {
             const quantity = Number($('#quantity').val());
-            addToCart(product, quantity);
+            addToCart(product.id, quantity);
             return false;
         });
 

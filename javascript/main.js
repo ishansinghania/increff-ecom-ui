@@ -14,13 +14,14 @@ $(document).ready(function () {
     updateCartQuantity();
 
     // Automatically update the date time in the footer every second
-    setInterval(getDateTime, 1000);
+    setInterval(setDateTime, 1000);
 
     // Initializing the tooltip. Required for the tooltip to work
     $('[data-tooltip="tooltip"]').tooltip()
 });
 
-function addToCart(product, quantity) {
+function addToCart(productId, quantity) {
+    // Validation if user is not logged in then redirect to login
     if (!isUserLoggedIn()) {
         showError('User not logged in');
         setTimeout(redirectToLogin, 1500);
@@ -32,11 +33,11 @@ function addToCart(product, quantity) {
         return;
     }
 
-    const productCopy = { ...product }; // Creating a new object to avoid changing of original product object
     const cartItems = localStorage.getItem(getCartKey()) ? JSON.parse(localStorage.getItem(getCartKey())) : [];
 
+    // Finding and adding the product if it exists in the cart.
     if (cartItems.length) {
-        const index = cartItems.findIndex(item => item.id === productCopy.id);
+        const index = cartItems.findIndex(item => item.id === productId);
         if (index >= 0) {
             cartItems[index].quantity += quantity;
             localStorage.setItem(getCartKey(), JSON.stringify(cartItems));
@@ -46,8 +47,11 @@ function addToCart(product, quantity) {
             return;
         }
     }
-    productCopy['quantity'] = quantity;
-    cartItems.push(productCopy);
+    // Adding in the cart if the product is not found in the cart
+    cartItems.push({
+        id: productId,
+        quantity
+    });
     localStorage.setItem(getCartKey(), JSON.stringify(cartItems));
 
     updateCartQuantity();
@@ -87,7 +91,8 @@ function redirectToHome() {
     window.location.href = '/';
 }
 
-function getDateTime() {
+// To set the current date-time
+function setDateTime() {
     $('#date-time')
         .text(new Date().toLocaleString('en-US', {
             weekday: 'long',
