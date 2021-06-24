@@ -13,11 +13,11 @@ $('form').on('submit', function (event) {
     const email = $('input#email').val();
     const password = $('input#password').val();
 
-    if (!isUserLoggedIn()) // This is for multiple login safe check
+    if (!isUserLoggedIn()) // For multiple login safe check
         $.getJSON('/assets/users.json', (users) => {
             const user = users.filter(user => email === user.email && password === user.password);
-            // Setting user in localstorage
 
+            // Setting user in localstorage
             if (user?.length) {
                 $('#error-message').addClass('d-none');
                 setUser(user);

@@ -1,17 +1,23 @@
-$('.container').addClass('d-none');
-
 $(document).ready(() => {
-    const cartItems = localStorage.getItem(getCartKey()) ? JSON.parse(localStorage.getItem(getCartKey())) : [];
+    const cartItems = getCartItems();
 
+    if (!cartItems?.length) {
+        $('.container').removeClass('d-none');
+        removePaymentSection();
+        return;
+    }
+
+    // Initializing the payment info
     const paymentInfo = {
         total: 0,
         gst: 0,
         subtotal: 0,
-        productCount: 0,
     };
 
     // Getting all the products
     $.getJSON('/assets/available-inventory.json', (products) => {
+        const productList = $('#product-list');
+        const entry = $('.product').first();
 
         // Traversing through all the values of the cart
         $.each(cartItems, (i, cartItem) => {
@@ -20,48 +26,53 @@ $(document).ready(() => {
 
             // Doing all the operations only if the product is present and the quantity is greater than 0
             if (product && cartItem?.quantity > 0) {
-                const productEntry = $('.product').first().clone();
+                const clone = entry.clone();
+                clone.removeClass('d-none');
+
+                // Setting a custom id to be used to find the product
+                clone.attr('id', product.id);
+
+                // Attaching id and event handlers to delete the product
+                clone.find('.fa-trash-alt').attr('id', 'delete-' + product.id, 'data-product-id', product.id).on({
+                    'click': () => deleteProduct(products, product.id),
+                    'mouseenter': function () { $(this).addClass('text-danger') },
+                    'mouseleave': function () { $(this).removeClass('text-danger') }
+                })
 
                 // Adding the attributes and values of the product in the cloned element
-                productEntry.find('img').attr('src', product?.image || '');
-                productEntry.find('.product-brand').text(product?.brandName || '');
-                productEntry.find('.product-name').text(product?.name || '');
-                productEntry.find('.product-size').text(product?.size || '');
-                productEntry.find('.product-mrp').text(product?.mrp || 0);
-                productEntry.find('.product-quantity').text(cartItem?.quantity || 0);
+                clone.find('img').attr('src', product?.image || '');
+                clone.find('.product-brand').text(product?.brandName || '');
+                clone.find('.product-name').text(product?.name || '');
+                clone.find('.product-size').text(product?.size || '');
+                clone.find('.product-mrp').text(product?.mrp || 0);
+                clone.find('.product-quantity').text(cartItem.quantity);
 
                 // Appnding the cloned element in the list
-                $('#product-list').append(productEntry);
+                productList.append(clone);
 
                 // Calculating subtotal
-                paymentInfo.subtotal += (product?.mrp || 0 * Number(cartItem?.quantity || 0));
-                paymentInfo.productCount += 1;
+                paymentInfo.subtotal += ((product?.mrp || 0) * Number(cartItem?.quantity || 0));
             }
         });
 
         // Removing the dummy element from the list
-        $('#product-list').find('.product').first().remove();
-
-        if (!paymentInfo.productCount) {
-            $('#no-product').removeClass('d-none');
-        }
+        entry.remove();
 
         // Setting the total item value
-        $('#total-items').text(paymentInfo.productCount);
+        $('#total-items').text(cartItems?.length || 0);
 
         // Payment Calculation
         paymentInfo.gst = +(0.14 * paymentInfo.subtotal).toFixed(2);
-        paymentInfo.total = (paymentInfo.subtotal + paymentInfo.gst).toFixed(2);
+        paymentInfo.total = +(paymentInfo.subtotal + paymentInfo.gst).toFixed(2);
 
         // Adding the payment values in the view
-        $('#subtotal').append(paymentInfo.subtotal);
-        $('#gst').append(paymentInfo.gst);
-        $('#total').append(paymentInfo.total);
+        $('#subtotal').text(paymentInfo.subtotal);
+        $('#gst').text(paymentInfo.gst);
+        $('#total').text(paymentInfo.total);
 
         $('#place-order').click(() => {
-            if (isUserLoggedIn()) downloadOrder(products, cartItems);
-            else redirectToLogin();
-            return;
+            if (!checkSession()) return;
+            downloadOrder(products);
         });
 
         // Showing the page when the page is completly loaded and filled with data.
@@ -70,7 +81,66 @@ $(document).ready(() => {
 
 });
 
-function downloadOrder(productsList, cartItems) {
+function deleteProduct(products, productId) {
+    if (!checkSession()) return;
+
+    // Updating the local storage after removing the product.
+    let cartItems = getCartItems();
+
+    cartItems = cartItems.filter(item => item.id !== productId);
+    localStorage.setItem(getCartKey(), JSON.stringify(cartItems));
+
+    // Removing the deleted product from the view
+    $('#product-list').find('#' + productId).first().remove();
+
+    // Setting the total item value
+    $('#total-items').text(cartItems?.length || 0);
+
+    // Updating the payment info to consolidate the removed product.
+    updatePayment(products, cartItems);
+
+    // Removing payment section from view if the cart is empty
+    if(!cartItems.length) removePaymentSection();
+
+    // Showing success message
+    showSuccess('Product deleted successfully');
+}
+
+function removePaymentSection() {
+    $('#payment-section').addClass('d-none');
+    $('#no-product').removeClass('d-none');
+}
+
+function updatePayment(products, cartItems) {
+    const paymentInfo = {
+        total: 0,
+        gst: 0,
+        subtotal: 0,
+    };
+
+    cartItems.map(item => {
+        const product = products.find(prod => prod.id === item.id);
+
+        // Calculating subtotal
+        paymentInfo.subtotal += ((product?.mrp || 0) * Number(item?.quantity || 0));
+    });
+
+    paymentInfo.gst = +(0.14 * paymentInfo.subtotal).toFixed(2);
+    paymentInfo.total = +(paymentInfo.subtotal + paymentInfo.gst).toFixed(2);
+
+    // Adding the payment values in the view
+    $('#subtotal').text(paymentInfo.subtotal);
+    $('#gst').text(paymentInfo.gst);
+    $('#total').text(paymentInfo.total);
+}
+
+function downloadOrder(productsList) {
+    const cartItems = getCartItems();
+
+    if (!cartItems.length) {
+        showError('No products added. Please add more products to place an order');
+        return;
+    }
     const fields = ["id", "brandName", "name", "clientSkuId", "size", "mrp"];
 
     // creating an array of products based on the fields.
@@ -107,4 +177,6 @@ function downloadOrder(productsList, cartItems) {
     tempLink.href = csvURL;
     tempLink.setAttribute('download', 'order.csv');
     tempLink.click();
+
+    showSuccess('Order placed successfully');
 }

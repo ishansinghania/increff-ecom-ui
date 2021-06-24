@@ -1,6 +1,3 @@
-// Waiting fot the page to load first;
-$('.container').addClass('d-none');
-
 $(document).ready(() => {
     const urlParams = new URLSearchParams(window.location.search);
     const productId = parseInt(urlParams.get('id')) || 1;
@@ -14,19 +11,22 @@ $(document).ready(() => {
             setTimeout(redirectToHome, 1500);
             return;
         }
+        
+        const carousel = $('.carousel-inner');
+        const carouselItem = $('.carousel-inner').find('.carousel-item').first();
 
         // Adding images in the carousel.
         $.each(product.images, (i, image) => {
-            const carouselItem = $('.carousel-inner').find('.carousel-item').first().clone();
-            carouselItem.find('img').attr('src', image);
+            const clone = carouselItem.clone().removeClass('d-none');
+            clone.find('img').attr('src', image);
 
             // Adding active class to the fist element to start the carousel. Without it, the carousel won't work
-            if (i === 0) carouselItem.addClass('active');
-            $('.carousel-inner').append(carouselItem);
+            if (i === 0) clone.addClass('active');
+            carousel.append(clone);
         });
 
         // To remove the dummy img tag.
-        $('.carousel-inner').find('.carousel-item').first().remove();
+        carouselItem.remove();
 
         // Adding the product detials in the page.
         $('#product-brand').text(product?.brandName || '');

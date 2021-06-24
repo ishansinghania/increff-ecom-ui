@@ -17,23 +17,20 @@ $(document).ready(function () {
     setInterval(setDateTime, 1000);
 
     // Initializing the tooltip. Required for the tooltip to work
-    $('[data-tooltip="tooltip"]').tooltip()
+    $('[data-tooltip="tooltip"]').tooltip();
+    setLoggedInUser();
 });
 
 function addToCart(productId, quantity) {
     // Validation if user is not logged in then redirect to login
-    if (!isUserLoggedIn()) {
-        showError('User not logged in');
-        setTimeout(redirectToLogin, 1500);
-        return;
-    }
+    if (!checkSession()) return;
 
     if (quantity < 1) {
         showError('Quantity should be atleast 1');
         return;
     }
 
-    const cartItems = localStorage.getItem(getCartKey()) ? JSON.parse(localStorage.getItem(getCartKey())) : [];
+    const cartItems = getCartItems();
 
     // Finding and adding the product if it exists in the cart.
     if (cartItems.length) {
@@ -59,7 +56,7 @@ function addToCart(productId, quantity) {
 }
 
 function updateCartQuantity() {
-    const cartItems = localStorage.getItem(getCartKey()) ? JSON.parse(localStorage.getItem(getCartKey())) : [];
+    const cartItems = getCartItems();
     const productQuantity = cartItems.reduce((accr, curr) => accr += curr.quantity, 0);
 
     $('.cart-quantity').text(productQuantity);
@@ -76,6 +73,24 @@ function getUserKey() {
 
 function getCartKey() {
     return 'cart_items';
+}
+
+function getCartItems() {
+    try {
+        const items = JSON.parse(localStorage.getItem(getCartKey()));
+        return items;
+    } catch(err) {
+        return [];
+    }
+}
+
+function setLoggedInUser() {
+    try {
+        const user = JSON.parse(localStorage.getItem(getUserKey()));
+        $('#user-name').text(user[0].name).removeClass('d-none');
+    } catch(err) {
+        return;
+    }
 }
 
 function isUserLoggedIn() {
@@ -103,4 +118,13 @@ function setDateTime() {
             minute: '2-digit',
             second: '2-digit',
         }));
+}
+
+function checkSession() {
+    if (!isUserLoggedIn()) {
+        showError('User not logged in');
+        setTimeout(redirectToLogin, 1500);
+        return false;
+    }
+    return true;
 }
