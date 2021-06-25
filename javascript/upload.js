@@ -2,6 +2,8 @@ $(document).ready(() => {
     $('button').click(() => $('input[type=file]').click());
 
     $('input[type=file]').on('change', function () {
+        if(!checkSession()) return;
+
         const file = this.files[0];
 
         if (file) $("#loader").show();
