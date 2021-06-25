@@ -34,7 +34,7 @@ function getUser() {
         const user = JSON.parse(localStorage.getItem(getUserKey()));
         return user[0];
     } catch (err) {
-        checkSession();
+        return void 0;
     }
 }
 
