@@ -88,7 +88,7 @@ function deleteProduct(products, productId) {
     let cartItems = getCartItems();
 
     cartItems = cartItems.filter(item => item.id !== productId);
-    localStorage.setItem(getCartKey(), JSON.stringify(cartItems));
+    setCartItems(cartItems);
 
     // Removing the deleted product from the view
     $('#product-list').find('#' + productId).first().remove();
