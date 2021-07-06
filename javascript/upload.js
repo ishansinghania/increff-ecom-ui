@@ -43,43 +43,23 @@ function parseFile(data) {
         return;
     }
 
-    // const row = $('tbody').find('tr').first().empty().removeClass('d-none');
-
     // Empty the table
     $('tbody').empty();
-    // $('thead').empty();
 
-    // const fields = data[0];
-    // const products = data.slice(1);
-
+    // Parsing the data
     const tableBody = $('tbody');
-
-    // $.each(fields, (i, field) => {
-    //     $('thead').append(`<th>`+field+`</th>`);
-    // })
-
     data.every((entry, index) => {
         return this.sanitizeRow(entry, index, tableBody);
     });
 
-    // $.each(products, (i, product) => {
-    //     const entry = row.clone();
-
-    //     // Adding only if the product has an id
-    //     if (product?.length && product[0]) {
-    //         product.map(value => entry.append(`<td>`+value+`</td>`));
-    //         tableBody.append(entry);
-    //     }
-    // });
-    // row.remove();
-
+    // Showing the table
     $('#table-container').removeClass('d-none');
-    // showSuccess('File uploaded successfully');
 }
 
 function sanitizeRow(row, index, tableBody) {
     const fields = ['id', 'brandName', 'name', 'clientSkuId', 'size', 'quantity', 'mrp', 'subtotal', 'gst', 'total'];
 
+    // Sanity checks
     if (fields.length !== Object.keys(row)?.length) {
         showError('Some columns are missing');
         return false;
@@ -90,6 +70,7 @@ function sanitizeRow(row, index, tableBody) {
         showError(`Quantity should be atleast 1 at row index ${index + 1}`);
         return false
     } else {
+        // Creating the table row and filling the data
         const tr = $('<tr></tr>');
         for (let field of fields) {
             if (row[field] === null || row[field] === void 0) {
