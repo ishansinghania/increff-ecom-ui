@@ -26,7 +26,7 @@
     <nav class="navbar navbar-light shadow-sm">
         <div class="container-fluid">
             <a class="navbar-brand mr-auto" href="/">
-                <img src="/assets/brand-logo.png" />
+                <img src="/assets/logo.png" />
             </a>
             <div class="nav-item px-2">
                 <a class="nav-link text-dark position-relative" href="/html/checkout.html">
@@ -56,13 +56,22 @@
                 <input class="d-none" type="file" accept=".csv" />
             </div>
             <div class="d-none col-12 overflow-auto" id="table-container">
-                <table class="table table-striped table-hover table-bordered">
-                    <thead class="thead-dark text-capitalize">
-                        <tr></tr>
+                <table class="table table-striped table-hover table-bordered bg-white">
+                    <thead class="bg-dark text-white text-capitalize">
+                        <tr>
+                            <td>ID</td>
+                            <td>Brand Name</td>
+                            <td>Name</td>
+                            <td>Client SKU</td>
+                            <td>Size</td>
+                            <td>Quantity</td>
+                            <td>MRP</td>
+                            <td>Sub-total</td>
+                            <td>GST</td>
+                            <td>Total</td>
+                        </tr>
                     </thead>
-                    <tbody>
-                        <tr class="d-none"></tr>
-                    </tbody>
+                    <tbody></tbody>
                 </table>
             </div>
         </div>

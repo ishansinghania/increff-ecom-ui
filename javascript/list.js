@@ -23,17 +23,13 @@ $(document).ready(() => {
             // Appending the cloned element in the container
             $('#list-container').append(clone);
 
-            // Hiding the cart popup initially
-            $('.cart-section').hide().click((event) => event.stopImmediatePropagation());
+            // Preventing the navigation to product detail page
+            $('.cart-section').click((event) => event.stopImmediatePropagation());
 
             // Attaching the event handlers to various mouse and click events on the product
             $('#' + i).on({
                 'click': () => window.location.href = "/html/detail.html?id=" + (i + 1),
-                'mouseenter': () => $('#cart-section-' + i).show(),
-                'mouseleave': () => {
-                    $('#cart-section-' + i).hide();
-                    $('#input' + i).val('1')
-                }
+                'mouseleave': () => $('#input' + i).val('1'),
             })
 
             // To add the product in the cart.

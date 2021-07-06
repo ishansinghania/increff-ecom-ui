@@ -13,6 +13,8 @@ $('form').on('submit', function (event) {
     const email = $('input#email').val();
     const password = $('input#password').val();
 
+    $('button').prop( "disabled", true ).addClass('text-muted border-secondary');
+
     if (!isUserLoggedIn()) // For multiple login safe check
         $.getJSON('/assets/users.json', (users) => {
             const user = users.filter(user => email === user.email && password === user.password);
@@ -21,11 +23,12 @@ $('form').on('submit', function (event) {
             if (user?.length) {
                 $('#error-message').addClass('d-none');
                 setUser(user);
-                showSuccess('Logged in successfully');
+                // showSuccess('Logged in successfully');
 
             } else {
                 // Showing error message in case of wrong user id or password
                 $('#error-message').removeClass('d-none');
+                $('button').prop( "disabled", false ).removeClass('text-muted border-secondary');
             }
         });
     else {

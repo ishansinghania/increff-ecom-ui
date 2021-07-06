@@ -8,6 +8,10 @@ html {
     position: relative;
 }
 
+body {
+    background-color: #f8f8f8 !important;
+}
+
 nav {
     position: fixed !important;
     top: 0;
