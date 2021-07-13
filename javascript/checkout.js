@@ -18,6 +18,7 @@ $(document).ready(() => {
     $.getJSON('/assets/available-inventory.json', (products) => {
         const productList = $('#product-list');
         const entry = $('.product').first();
+        let totalCount = 0;
 
         // Traversing through all the values of the cart
         $.each(cartItems, (i, cartItem) => {
@@ -28,6 +29,7 @@ $(document).ready(() => {
             if (product && cartItem?.quantity > 0) {
                 const clone = entry.clone();
                 clone.removeClass('d-none');
+                ++totalCount;
 
                 // Setting a custom id to be used to find the product
                 clone.attr('id', product.id);
@@ -59,7 +61,7 @@ $(document).ready(() => {
         entry.remove();
 
         // Setting the total item value
-        $('#total-items').text(cartItems?.length || 0);
+        $('#total-items').text(totalCount || 0);
 
         // Payment Calculation
         paymentInfo.gst = +(0.14 * paymentInfo.subtotal).toFixed(2);
@@ -122,7 +124,8 @@ function updatePayment(products, cartItems) {
         const product = products.find(prod => prod.id === item.id);
 
         // Calculating subtotal
-        paymentInfo.subtotal += ((product?.mrp || 0) * Number(item?.quantity || 0));
+        if (item?.quantity > 0)
+            paymentInfo.subtotal += ((product?.mrp || 0) * Number(item?.quantity || 0));
     });
 
     paymentInfo.gst = +(0.14 * paymentInfo.subtotal).toFixed(2);
@@ -144,17 +147,22 @@ function downloadOrder(productsList) {
     const fields = ["id", "brandName", "name", "clientSkuId", "size", "mrp"];
 
     // creating an array of products based on the fields.
-    const products = cartItems.map(item => {
+    const products = [];
+    cartItems.forEach(item => {
         const temp = {};
         const product = productsList.find(product => product.id === item.id);
 
-        for (field of fields) temp[field] = product[field];
-
-        temp.quantity = item.quantity;
-        temp.subtotal = product.mrp * item.quantity;
-        temp.gst = +(temp.subtotal * 0.14).toFixed(2);
-        temp.total = +(temp.subtotal + temp.gst).toFixed(2);
-        return temp;
+        if (product) {
+            for (field of fields) temp[field] = product[field];
+    
+            if (item.quantity > 0) {
+                temp.quantity = item.quantity;
+                temp.subtotal = product.mrp * item.quantity;
+                temp.gst = +(temp.subtotal * 0.14).toFixed(2);
+                temp.total = +(temp.subtotal + temp.gst).toFixed(2);
+                products.push(temp);
+            }
+        }
     });
 
     // Sorting in ascending order

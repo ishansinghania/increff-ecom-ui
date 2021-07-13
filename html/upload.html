@@ -26,7 +26,7 @@
     <nav class="navbar navbar-light shadow-sm">
         <div class="container-fluid">
             <a class="navbar-brand mr-auto" href="/">
-                <img src="/assets/logo.png" />
+                <img src="/assets/brand-logo.png" />
             </a>
             <div class="nav-item px-2">
                 <a class="nav-link text-dark position-relative" href="/html/checkout.html">
@@ -48,27 +48,28 @@
 
     <div class="container">
         <div class="row m-0">
-            <div class="d-flex justify-content-end mb-4 col-12">
+            <div class="d-flex justify-content-end mb-4 px-0 px-lg-3 col-12">
                 <button class="btn btn-primary">
                     <i class="fas fa-file-upload pr-2"></i>
                     Upload File
                 </button>
                 <input class="d-none" type="file" accept=".csv" />
             </div>
-            <div class="d-none col-12 overflow-auto" id="table-container">
+            <div class="error-list text-danger mb-3 col-12 px-0 px-lg-3 d-none" id=error-list></div>
+            <div class="col-12 px-0 px-md-3 overflow  d-none" id="table-container">
                 <table class="table table-striped table-hover table-bordered bg-white">
                     <thead class="bg-dark text-white text-capitalize">
                         <tr>
-                            <td>ID</td>
-                            <td>Brand Name</td>
-                            <td>Name</td>
-                            <td>Client SKU</td>
-                            <td>Size</td>
-                            <td>Quantity</td>
-                            <td>MRP</td>
-                            <td>Sub-total</td>
-                            <td>GST</td>
-                            <td>Total</td>
+                            <th>ID</th>
+                            <th>Brand Name</th>
+                            <th>Name</th>
+                            <th>Client SKU</th>
+                            <th>Size</th>
+                            <th>Quantity</th>
+                            <th>MRP</th>
+                            <th>Sub-total</th>
+                            <th>GST</th>
+                            <th>Total</th>
                         </tr>
                     </thead>
                     <tbody></tbody>

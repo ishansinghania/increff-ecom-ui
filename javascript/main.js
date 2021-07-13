@@ -112,7 +112,11 @@ function getCartItems() {
 
 function updateCartQuantity() {
     const cartItems = getCartItems();
-    const totalQuantity = cartItems.reduce((accr, curr) => accr += curr.quantity, 0);
+    const totalQuantity = cartItems.reduce((accr, curr) => {
+        if (curr?.quantity > 0)
+            accr += curr?.quantity;
+        return accr;
+    }, 0);
 
     $('.cart-quantity').text(totalQuantity);
 }
