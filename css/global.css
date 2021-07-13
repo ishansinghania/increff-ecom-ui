@@ -9,7 +9,7 @@ html {
 }
 
 body {
-    background-color: #f8f8f8 !important;
+    background-color: #f0f2f5 !important;
 }
 
 nav {
@@ -81,6 +81,7 @@ img.checkout-image {
 
 .login-container {
     top: 20%;
+    padding: 2.25rem !important;
 }
 
 .fa-trash-alt {
@@ -88,4 +89,36 @@ img.checkout-image {
     bottom: 0;
     right: 0;
     padding: 0.75rem;
+}
+
+.error-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.error-list > span {
+    padding: 0.15rem 0.5rem;
+    background-color: white;
+}
+
+.error-list > span:last-child {
+    padding: 0.15rem 0.5rem 0.25rem;
+    background-color: white;
+}
+
+@media (min-width: 992px) {
+    th {
+      position: sticky;
+      top: 3.7rem;
+      z-index: 99999;
+      background-color: #343a40;
+      color: #fff;
+      text-transform: capitalize;
+    }
+  }
+
+  @media (max-width: 992px) {
+    .overflow {
+        overflow: auto;
+    }
 }
