@@ -48,7 +48,7 @@ function setUser(user) {
 // checking if the user is logged in or not
 function isUserLoggedIn() {
     const user = localStorage.getItem(getUserKey());
-    return !!user;
+    return !!(user?.id && user?.name);
 }
 
 function redirectToHome() {

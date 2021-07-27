@@ -45,7 +45,7 @@ function setLoggedInUser() {
 
 function isUserLoggedIn() {
     const user = getUser();
-    return !!user;
+    return !!(user?.id && user?.name);
 }
 
 function checkSession() {
